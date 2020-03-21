@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Todmy/moonactive-test/issues"
   },
-  "homepage": "https://github.com/Todmy/moonactive-test#readme"
+  "homepage": "https://github.com/Todmy/moonactive-test#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
