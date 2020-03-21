@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  redis:
+    image: redis
+    container_name: redis-store
+    networks:
+      - app-network
+  
+  app:
+    build: .
+    container_name: app
+    restart: unless-stopped
+    ports:
+      - "4200:8080"
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+    command: npx nodemon app.js
+
+networks:
+  app-network:
+    driver: bridge
