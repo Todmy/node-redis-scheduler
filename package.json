@@ -1,0 +1,19 @@
+{
+  "name": "moonactive",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Todmy/moonactive-test.git"
+  },
+  "author": "todmy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Todmy/moonactive-test/issues"
+  },
+  "homepage": "https://github.com/Todmy/moonactive-test#readme"
+}
