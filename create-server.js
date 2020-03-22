@@ -1,27 +1,27 @@
+// TODO: the logic of this file should be splitted to server.js and app.js in the future.
+// Currently, it is skipped for simplicity.
 const express = require('express');
 const helmet = require('helmet');
 const logger = require('./logger');
-
-const server = express();
-
-server.use(helmet());
-server.use(express.urlencoded({ extended: true }));
-server.use(express.json());
-server.use(logger);
-
+const gracefullShutdown = require('./graceful-shutdown');
+const errorHandler = require('./error-handler');
 const port = process.env.SERVER_PORT;
 
-process.on('SIGTERM', () => {
-  console.info('SIGTERM signal received. Closing http server.'); // eslint-disable-line no-console
-  server.close(() => {
-    console.log('Http server closed.'); // eslint-disable-line no-console
-  });
-});
+const app = express();
+
+app.use(helmet());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(logger);
+
+gracefullShutdown(app);
 
 module.exports = function serverBuilder(routes) {
-  server.use(...routes);
+  app.use(...routes);
 
-  server.listen(port, () => console.log(`Example ap listening on port ${port}!`)); // eslint-disable-line no-console
+  app.use(errorHandler);
 
-  return server;
+  app.listen(port, () => console.log(`Example ap listening on port ${port}!`)); // eslint-disable-line no-console
+
+  return app;
 };
