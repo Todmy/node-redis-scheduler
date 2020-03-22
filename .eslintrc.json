@@ -1,0 +1,16 @@
+{
+  "plugins": ["node", "security"],
+  "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended-script",
+      "plugin:security/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "rules": {
+      "semi": ["error", "always"],
+      "node/no-deprecated-api": "error"
+  }
+}
