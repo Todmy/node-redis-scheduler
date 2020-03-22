@@ -1,17 +1,24 @@
 const express = require('express');
 const helmet = require('helmet');
-const app = express();
+const server = express();
 
-app.use(helmet());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+server.use(helmet());
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 const port = process.env.SERVER_PORT;
 
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received. Closing http server.'); // eslint-disable-line no-console
+  server.close(() => {
+    console.log('Http server closed.'); // eslint-disable-line no-console
+  });
+});
+
 module.exports = function serverBuilder(routes) {
-  app.use(...routes);
+  server.use(...routes);
 
-  app.listen(port, () => console.log(`Example ap listening on port ${port}!`)); // eslint-disable-line no-console
+  server.listen(port, () => console.log(`Example ap listening on port ${port}!`)); // eslint-disable-line no-console
 
-  return app;
+  return server;
 };
