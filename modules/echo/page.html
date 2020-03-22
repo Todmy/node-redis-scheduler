@@ -36,17 +36,44 @@
 
     <div class="row">
       <div class="col">
-        <form class="form-inline text-center at-time-form" role="form" action="/echo-at-time" method="post">
+        <form class="form-inline text-center at-time-form" role="form">
           <div class="form-group">
-            <input type="text" name="message" class="form-control" placeholder="Your message">
+            <input type="text" name="message" class="form-control" placeholder="Your message" required>
           </div>
           <div class="form-group">
-            <input type="time" name="time" class="form-control" placeholder="Time">
+            <input type="datetime-local" name="time" class="form-control" placeholder="Time" step="1" required>
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" id="setEchoTimer" class="btn btn-default">Submit</button>
         </form>
       </div>
     </div>
   </div>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const formData = new FormData(document.querySelector('form'));
+
+      const data = {};
+      formData.forEach(function(value, key){
+          data[key] = value;
+      });
+
+      data.time = new Date(data.time); // this is needed for handling timezone
+
+      // const oldTime = data.time;
+      // formData.set('time', new Date(oldTime)); // this is needed for handling timezone
+
+      const request = new XMLHttpRequest();
+      request.onreadystatechange = () => {
+        if (request.readyState === 4) {
+          document.location.reload();
+        }
+      };
+      request.open('POST', '/echo-at-time');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(data));
+    });
+  </script>
 </body>
 </html>
