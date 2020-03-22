@@ -3,7 +3,8 @@
   "extends": [
       "eslint:recommended",
       "plugin:node/recommended-script",
-      "plugin:security/recommended"
+      "plugin:security/recommended",
+      "airbnb-base/legacy"
   ],
   "parserOptions": {
     "sourceType": "module",
@@ -11,6 +12,8 @@
   },
   "rules": {
       "semi": ["error", "always"],
-      "node/no-deprecated-api": "error"
+      "node/no-deprecated-api": "error",
+      "eol-last": ["error", "always"],
+      "comma-dangle": ["error", "always-multiline"]
   }
 }
