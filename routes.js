@@ -1,6 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-router.get('/', (req, res) => res.send('Hello World!'));
+const statusMonitor = require('express-status-monitor')();
+const { route: echoRoute } = require('./modules/echo');
+
+router.use(echoRoute);
+router.use(statusMonitor);
 
 module.exports = router;

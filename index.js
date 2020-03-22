@@ -1,5 +1,4 @@
 const createServer = require('./create-server');
+const mainRoutes = require('./routes');
 
-const routes = require('./routes');
-
-createServer(routes);
+createServer([mainRoutes]);
