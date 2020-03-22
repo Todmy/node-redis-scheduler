@@ -4,7 +4,9 @@ services:
 
   redis:
     image: redis
-    container_name: redis-store
+    container_name: $REDIS_HOST
+    ports:
+      - "$REDIS_PORT:6379"
     networks:
       - app-network
   

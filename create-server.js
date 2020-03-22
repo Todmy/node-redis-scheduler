@@ -2,9 +2,9 @@
 // Currently, it is skipped for simplicity.
 const express = require('express');
 const helmet = require('helmet');
-const logger = require('./logger');
-const gracefullShutdown = require('./graceful-shutdown');
-const errorHandler = require('./error-handler');
+const { expressLogger: logger } = require('./helpers/logger');
+const gracefullShutdown = require('./helpers/graceful-shutdown');
+const errorHandler = require('./helpers/error-handler');
 const port = process.env.SERVER_PORT;
 
 const app = express();

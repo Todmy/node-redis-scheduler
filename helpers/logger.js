@@ -1,7 +1,7 @@
 const winston = require('winston');
 const expressWinston = require('express-winston');
 
-const logger = expressWinston.logger({
+const config = {
   transports: [
     new winston.transports.Console(),
   ],
@@ -11,6 +11,12 @@ const logger = expressWinston.logger({
   ),
   meta: true,
   expressFormat: true,
-});
+};
 
-module.exports = logger;
+const logger = winston.createLogger(config);
+const expressLogger = expressWinston.logger(config);
+
+module.exports = {
+  logger,
+  expressLogger,
+};
