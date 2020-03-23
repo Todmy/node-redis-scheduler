@@ -19,13 +19,13 @@ To stop the docker-compose, run:
 docker-compose down
 ```
 
-Interesting notes of this example:
+### Interesting notes of this example:
 1) Correctly handle data from different timezones
 2) Module structure will allow to split it to microservices
 3) Only once print a message to console. Even if few instances communicate with Redis.
 4) After shutdown reviews and prints all expired messages(should be improved)
    
-TODO:
+### TODO:
 1) tests
 2) improve printing messages after shutdown
 3) redis replication 
