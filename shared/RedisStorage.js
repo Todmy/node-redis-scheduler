@@ -10,6 +10,18 @@ class RedisStorage {
     this.storage.set(key, value, cb);
   }
 
+  getDifference(keys, cb) {
+    this.storage.keys('*', (err, storageKeys) => {
+      if (storageKeys.length === keys.length) return;
+
+      const absentKeys = storageKeys.filter(k1 => !keys.some(k2 => k2.startsWith(k1)));
+
+      this.storage.mget(absentKeys, cb);
+
+      absentKeys.forEach(key => this.storage.del(key));
+    });
+  }
+
   executeIfExist(key, cb) {
     this.storage.multi()
       .get(key)

@@ -1,5 +1,4 @@
 const redisClientBuilder = require('../../shared/redis-client');
-const toUnix = require('../../helpers/toUnixTime');
 
 const parseKeyValue = (keyValue) => {
   const devider = ':';
@@ -19,6 +18,7 @@ module.exports = class EchoController {
     this.printMsg = printer;
 
     this.subscribeToEvents();
+    this.printOutdatedMessages();
   }
 
   subscribeToEvents() {
@@ -29,6 +29,13 @@ module.exports = class EchoController {
 
     this.subscriber.psubscribe(`__key*${this.schedulerInstance}__:del`);
     this.subscriber.psubscribe(`__key*${this.schedulerInstance}__:expired`);
+  }
+
+  printOutdatedMessages() {
+    // TODO: should be optimized
+    this.publisher.keys('*', (pErr, publisherKeys) => {
+      this.storage.getDifference(publisherKeys, (err, repl) => repl.forEach(this.printMsg));
+    });
   }
 
   registerMsg({ message, time }) {
