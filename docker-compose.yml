@@ -10,9 +10,9 @@ services:
     networks:
       - app-network
   
-  app:
+  app1:
     build: .
-    container_name: app
+    container_name: app1
     restart: unless-stopped
     ports:
       - "4200:$SERVER_PORT"
@@ -23,6 +23,20 @@ services:
     networks:
       - app-network
     command: npx nodemon app.js
+  
+  # app2:
+  #   build: .
+  #   container_name: app2
+  #   restart: unless-stopped
+  #   ports:
+  #     - "4201:$SERVER_PORT"
+  #   env_file: 
+  #     - .env
+  #   volumes:
+  #     - .:/app
+  #   networks:
+  #     - app-network
+  #   command: npx nodemon app.js
 
 networks:
   app-network:

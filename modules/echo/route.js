@@ -2,13 +2,13 @@ const path = require('path');
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const outputToConsole = require('../../shared/outputToConsole');
+const redisStorage = require('../../shared/RedisStorage');
+const toUnix = require('../../helpers/toUnixTime');
 const EchoCtrl = require('./controller');
-const echo = new EchoCtrl(outputToConsole);
+const echo = new EchoCtrl(redisStorage, outputToConsole);
 
 const router = express.Router();
 const pathToHTMLPage = path.resolve(__dirname, './page.html');
-
-const toUnix = (reqDate) => Math.round((new Date(reqDate)).getTime() / 1000);
 
 router.get('/echo-at-time', (req, res) => res.sendFile(pathToHTMLPage));
 
