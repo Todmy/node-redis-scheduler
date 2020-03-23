@@ -1,4 +1,4 @@
-const redisClientBuilder = require('../shared/redis-client');
+const redisClientBuilder = require('../services/redis-client');
 
 class RedisStorage {
   constructor() {

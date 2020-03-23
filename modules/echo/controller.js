@@ -1,4 +1,4 @@
-const redisClientBuilder = require('../../shared/redis-client');
+const redisClientBuilder = require('../../services/redis-client');
 
 const parseKeyValue = (keyValue) => {
   const devider = ':';

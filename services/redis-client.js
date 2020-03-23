@@ -1,5 +1,5 @@
 const redis = require('redis');
-const { logger } = require('../helpers/logger');
+const { logger } = require('./logger');
 const port = process.env.REDIS_PORT;
 const host = process.env.REDIS_HOST;
 
