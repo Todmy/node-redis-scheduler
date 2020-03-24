@@ -23,9 +23,9 @@ docker-compose down
 1) Correctly handle data from different timezones
 2) Module structure will allow to split it to microservices
 3) Only once print a message to console. Even if few instances communicate with Redis.
-4) After shutdown reviews and prints all expired messages(should be improved)
+4) After shutdown reviews and prints all expired messages(should be improved) 
    
 ### TODO:
 1) tests
-2) improve printing messages after shutdown
+2) improve printing messages after shutdown (look at rsmq and redis scripts)
 3) redis replication 
